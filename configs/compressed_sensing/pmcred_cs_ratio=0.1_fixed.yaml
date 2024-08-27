@@ -1,0 +1,35 @@
+_BASE_: ./base_unet.yaml
+
+exp_name: 'pmcred_ffhqFourier_cs_grayscale_celebA_ratio=0.1'
+
+model:
+  name: PMCRED
+  forward_model:
+    compression_ratio: 0.1
+  score_fn:
+    network_mode: sigma
+    use_embed: True
+  coeff:
+    name: GeometricAnnealingCoeffModule
+    decay_rate: 1
+    min_sigma: 1.5e-2
+  gamma: 1.0e-5
+  alpha: 4444
+  sigma: 1.5e-2
+
+inference:
+  is_wandb_logger: False
+  sample_args:
+    tmax: 10000
+    initialization: rand
+  inference_args:
+    max_num_batches: 1
+    n_samples: 10
+
+callbacks:
+  scalarcallback:
+    name: LocalScalarCallbackModule
+    vis_freq: 1
+  imagecallback:
+    name: LocalGrayImageCallbackModule
+  
