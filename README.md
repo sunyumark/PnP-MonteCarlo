@@ -17,7 +17,7 @@ conda deactivate
 ```
 
 ## Checkpoints
-The pre-trained checkpoints are available [**here**](https://livejohnshopkins-my.sharepoint.com/:f:/g/personal/ysun214_jh_edu/Ek2vadSp7u1Ct2qaBQX-b10B1Gk4tJ3S5t5HhB-5QwSOwA?e=htA3RP). Note that the checkpoints need to be placed in the proper fold for loading.
+The pre-trained checkpoints are available [**here**](https://livejohnshopkins-my.sharepoint.com/:f:/g/personal/ysun214_jh_edu/Ek2vadSp7u1Ct2qaBQX-b10B9LCBo_Xjxq98pF-kifBSSA?e=WHMMWm). Note that the checkpoints need to be placed in the proper fold for loading.
 
 Create the folder
 ```
