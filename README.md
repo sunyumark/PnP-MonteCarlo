@@ -25,7 +25,7 @@ mkdir score_ckpt
 ```
 Move the file to the folder
 ```
-mv dir/to/ckpt ./score_ckpt.pt
+mv dir/to/ckpt ./score_ckpt
 ```
 
 ## Run
