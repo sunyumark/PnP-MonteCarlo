@@ -1,0 +1,66 @@
+# base configuration
+exp_name: TBD
+accelerator: gpu
+
+checkpoint:
+  init_score_fn_dir: ./score_ckpt/fastmri_brain.pth
+  score_fn_trainability: False
+  load_ema: True
+
+model:
+  name: TBD
+  forward_model:
+    name: MRIRadial
+    input_snr: 40
+    var: 5.0e-5
+    shape: [256, 256]
+    num_lines: TBD
+  score_fn:
+    name: UNetModel
+    image_size: 256
+    in_channels: 1
+    model_channels: 128
+    out_channels: 1
+    num_res_blocks: 1
+    attention_resolutions: [16,8]     # a collection of downsample rates at which attention will take place. May be a set, list, or tuple.
+    network_mode: sigma               # a string from {'sigma','timestep'} that determines the embedding source type
+    use_embed: True                   # a boolean variable to control if activate embedding module.
+    dropout: 0                        # the dropout probability.
+    channel_mult: [1,1,2,2,4,4]       # channel multiplier for each level of the UNet.
+    conv_resample: True               # if True, use learned convolutions for upsampling and downsampling.
+    dims: 2                           # determines if the signal is 1D, 2D, or 3D.
+    num_classes: null                 # if specified (as an int), then this model will be class-conditional with `num_classes` classes.
+    use_checkpoint: False             # use gradient checkpointing to reduce memory usage.
+    use_fp16: False                   # if set the precision to float 16
+    num_heads: 1                      # the number of attention heads in each attention layer
+    num_head_channels: 64             # if specified, ignore num_heads and instead use a fixed channel width per attention head. 
+    num_heads_upsample: -1            # works with num_heads to set a different number of heads for upsampling. Deprecated.
+    use_scale_shift_norm: True        # use a FiLM-like conditioning mechanism.
+    resblock_updown: True             # use residual blocks for up/downsampling.
+    use_new_attention_order: False    # use a different attention pattern for potentially increased efficiency.
+  coeff:
+    name: TBD
+  transform:
+    name: Identity
+
+dataset:
+  name: FastMRIBrainData
+  finetune: False
+  denoise: False
+
+inference:
+  is_wandb_logger: TBD
+  sample_args:
+    tmax: TBD
+    initialization: zero
+
+logger: # for wandb only
+  project: TBD
+  entity: TBD
+
+procedure:
+  name: DatasetInference
+
+dataloader:
+  batch_size: 1
+  shuffle: false
